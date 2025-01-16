@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, MaxLength, Validate } from 'class-validator';
-import { ObjectId } from 'mongodb';
+import { IsObjectIdValidator } from 'src/utils/validators/IsObjectIdValidator';
 
 export class CreateSimpleDocumentDto {
   @IsString()
@@ -12,8 +12,7 @@ export class CreateSimpleDocumentDto {
   content: string;
 
   @IsString()
-  @Validate((value) => ObjectId.isValid(value), {
-    message: 'Owner Id must be a valid Id',
-  })
+  @IsNotEmpty()
+  @Validate(IsObjectIdValidator)
   owner_id: string;
 }

@@ -1,15 +1,16 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  ValidationPipe,
 } from '@nestjs/common';
-import { SimpleDocumentsService } from './simple-documents.service';
 import { CreateSimpleDocumentDto } from './dto/create-simple-document.dto';
 import { UpdateSimpleDocumentDto } from './dto/update-simple-document.dto';
+import { SimpleDocumentsService } from './simple-documents.service';
 
 @Controller('simple-documents')
 export class SimpleDocumentsController {
@@ -18,7 +19,10 @@ export class SimpleDocumentsController {
   ) {}
 
   @Post()
-  async create(@Body() createSimpleDocumentDto: CreateSimpleDocumentDto) {
+  async create(
+    @Body(new ValidationPipe())
+    createSimpleDocumentDto: CreateSimpleDocumentDto,
+  ) {
     return await this.simpleDocumentsService.create(createSimpleDocumentDto);
   }
 
@@ -32,12 +36,16 @@ export class SimpleDocumentsController {
     return await this.simpleDocumentsService.findOne(id);
   }
 
-  @Patch(':id')
-  update(
+  @Put(':id')
+  async update(
     @Param('id') id: string,
-    @Body() updateSimpleDocumentDto: UpdateSimpleDocumentDto,
+    @Body(new ValidationPipe())
+    updateSimpleDocumentDto: UpdateSimpleDocumentDto,
   ) {
-    return this.simpleDocumentsService.update(+id, updateSimpleDocumentDto);
+    return await this.simpleDocumentsService.update(
+      id,
+      updateSimpleDocumentDto,
+    );
   }
 
   @Delete(':id')

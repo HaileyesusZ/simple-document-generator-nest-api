@@ -59,8 +59,23 @@ export class SimpleDocumentsService {
     }
   }
 
-  update(id: number, updateSimpleDocumentDto: UpdateSimpleDocumentDto) {
-    return `This action updates a #${id} simpleDocument`;
+  async update(id: string, updateSimpleDocumentDto: UpdateSimpleDocumentDto) {
+    try {
+      const result = await this.prisma.$transaction(async (prisma) => {
+        return await prisma.simpleDocument.update({
+          where: {
+            id,
+          },
+          data: updateSimpleDocumentDto,
+        });
+      });
+      return result;
+    } catch (error) {
+      console.error('Unable to update simple document', error);
+      return new InternalServerErrorException({
+        message: 'Unable to update simple document',
+      });
+    }
   }
 
   async remove(id: string) {

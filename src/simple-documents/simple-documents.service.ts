@@ -3,7 +3,7 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 import { CreateSimpleDocumentDto } from './dto/create-simple-document.dto';
 import { UpdateSimpleDocumentDto } from './dto/update-simple-document.dto';
 

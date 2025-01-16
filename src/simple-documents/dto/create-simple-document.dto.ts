@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, MaxLength, Validate } from 'class-validator';
-import { IsObjectIdValidator } from 'src/utils/validators/IsObjectIdValidator';
+import { IsObjectIdValidator } from '../../utils/validators/IsObjectIdValidator';
 
 export class CreateSimpleDocumentDto {
   @IsString()

@@ -23,13 +23,13 @@ export class SimpleDocumentsController {
   }
 
   @Get()
-  findAll() {
-    return this.simpleDocumentsService.findAll();
+  async findAll() {
+    return await this.simpleDocumentsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.simpleDocumentsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.simpleDocumentsService.findOne(id);
   }
 
   @Patch(':id')
@@ -41,7 +41,7 @@ export class SimpleDocumentsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.simpleDocumentsService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.simpleDocumentsService.remove(id);
   }
 }

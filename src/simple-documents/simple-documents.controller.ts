@@ -18,8 +18,8 @@ export class SimpleDocumentsController {
   ) {}
 
   @Post()
-  create(@Body() createSimpleDocumentDto: CreateSimpleDocumentDto) {
-    return this.simpleDocumentsService.create(createSimpleDocumentDto);
+  async create(@Body() createSimpleDocumentDto: CreateSimpleDocumentDto) {
+    return await this.simpleDocumentsService.create(createSimpleDocumentDto);
   }
 
   @Get()
